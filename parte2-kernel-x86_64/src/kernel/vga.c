@@ -1,2 +1,2 @@
-/* src/kernel/vga.c — Salida VGA para "OK" */
-/* TODO: Episode 1 */
+/* src/kernel/vga.c — Episode 2 */
+/* Pendiente: helpers de consola VGA (opcional tras Episode 1). */

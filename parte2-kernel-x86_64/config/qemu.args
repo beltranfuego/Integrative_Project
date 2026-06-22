@@ -1,0 +1,5 @@
+# Argumentos extra para QEMU (una opción por línea; líneas con # son comentarios)
+-serial
+stdio
+-display
+gtk

@@ -1,7 +1,2 @@
-/* src/kernel/main.c — Punto de entrada en C */
-/* TODO: Episode 2 */
-
-void kernel_main(void)
-{
-    /* TODO */
-}
+/* src/kernel/main.c — Episode 2 */
+/* Pendiente: punto de entrada del kernel en C (long mode). */

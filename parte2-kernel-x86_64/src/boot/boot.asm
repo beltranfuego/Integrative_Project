@@ -1,9 +1,4 @@
-; src/boot/boot.asm — Punto de entrada _start
-; TODO: Episode 1 — imprimir "OK"
-
-global _start
-section .text
-
-_start:
-    ; TODO
-    hlt
+; src/boot/boot.asm
+; Punto de entrada _start — Episode 1
+;
+; Pendiente: escribir "OK" en memoria de video texto (0xB8000).

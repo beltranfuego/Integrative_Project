@@ -1,0 +1,14 @@
+# Artefactos locales — se generan dentro del contenedor
+build/
+output/
+iso/
+*.o
+*.bin
+*.elf
+*.iso
+
+# Git y editor
+.git/
+.gitignore
+.vscode/
+.idea/

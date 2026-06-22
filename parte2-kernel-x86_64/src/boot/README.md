@@ -1,0 +1,23 @@
+# Episode 1 — Arranque Multiboot2
+
+Archivos que implementarás en este paso:
+
+1. **`header.asm`** — Header Multiboot2 alineado (8 bytes), con tag de fin.
+2. **`boot.asm`** — Etiqueta global `_start` que escribe `OK` en la memoria de video texto.
+
+## Memoria VGA texto
+
+- Dirección base: **`0xB8000`**
+- Cada celda: carácter ASCII + atributo de color (1 byte cada uno).
+- Ejemplo: `'O'` en `0xB8000`, `'K'` en `0xB8002`.
+
+## Flujo de build
+
+```
+header.asm + boot.asm  →  nasm  →  build/*.o
+build/*.o + linker.ld  →  ld    →  build/kernel-ep1.elf
+kernel-ep1.elf         →  objcopy → output/kernel.bin
+kernel.bin + grub.cfg  →  grub-mkrescue → output/kernel.iso
+```
+
+GRUB arranca con `multiboot2 /boot/kernel.bin` (ver `grub.cfg` en la raíz).

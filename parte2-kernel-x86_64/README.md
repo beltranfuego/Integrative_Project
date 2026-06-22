@@ -2,84 +2,109 @@
 
 **Puntos:** 30 · **Responsable:** [Nombre C]
 
-Kernel mínimo x86_64 con Multiboot2, NASM, GRUB, QEMU y build reproducible
-en Docker. Genera `kernel.iso` al finalizar.
+Kernel mínimo x86_64 siguiendo el tutorial *Write Your Own 64-bit Operating System*.
+Build reproducible en Docker con **NASM**, **GRUB (Multiboot2)**, **QEMU**.
 
-## Arquitectura
+## Estado
 
-```
-GRUB (Multiboot2)
-    → boot.asm / header.asm
-    → Episode 1: imprimir "OK" (VGA o serial)
-    → Episode 2: GDT + paging + long mode
-    → main.c (kernel en C)
-```
+| Episodio | Objetivo | Estado |
+|----------|----------|--------|
+| **Episode 1** | Header Multiboot2 + `OK` en `0xB8000` | Estructura lista — ASM pendiente |
+| **Episode 2** | GDT + paging + long mode + `main.c` | Pendiente |
 
 ## Requisitos
 
-- Docker 24+
+- Docker 24+ y Docker Compose v2
 - Make 4.3+
-- (Opcional en host) QEMU para depuración fuera de Docker
+- (Opcional) NASM, GRUB, QEMU en el host para compilar sin Docker
 
-## Comandos
+## Inicio rápido (recomendado: Docker)
 
 ```bash
-make build       # Compila y genera kernel.iso
-make run         # Ejecuta en QEMU
-make episode1    # Build solo Episode 1
-make episode2    # Build completo (long mode + C)
-make clean       # Limpia artefactos
+cd parte2-kernel-x86_64
+
+# 1. Construir imagen de toolchain (una vez)
+make docker-build
+
+# 2. Compilar dentro del contenedor (cuando exista el ASM)
+make docker-episode1
+
+# 3. Ejecutar en QEMU
+make docker-run
 ```
 
-## Episodes
+En el host (con herramientas instaladas):
 
-### Episode 1
-
-- Header Multiboot2 válido
-- Salida `OK` visible en QEMU (VGA texto o puerto serial)
-
-### Episode 2
-
-- GDT configurada para modo 64 bits
-- Paging (identidad map o esquema documentado)
-- Transición a long mode
-- Llamada a `main()` en C
-
-## Diagrama de memoria
-
-```mermaid
-flowchart LR
-    subgraph low ["Bajo (32-bit boot)"]
-        MB2[Multiboot2 header]
-        BOOT[boot.asm]
-    end
-    subgraph transition ["Transición"]
-        GDT[GDT]
-        PG[Paging]
-        LM[Long mode]
-    end
-    subgraph high ["64-bit"]
-        MAIN[main.c]
-    end
-    MB2 --> BOOT --> GDT --> PG --> LM --> MAIN
+```bash
+make episode1    # → output/kernel.iso
+make run         # QEMU con la ISO
+make clean       # Limpia build/, iso/, binarios
 ```
 
-## Estructura
+## Comandos Make
+
+| Target | Descripción |
+|--------|-------------|
+| `help` | Lista de objetivos (por defecto) |
+| `docker-build` | Construye `integrative-kernel-toolchain:24.04` |
+| `docker-shell` | Bash interactivo en el contenedor |
+| `docker-episode1` | `make episode1` dentro de Docker |
+| `docker-run` | QEMU dentro de Docker (con `-display` del host) |
+| `episode1` | Ensambla, enlaza y genera `output/kernel.iso` |
+| `episode2` | Reservado para long mode + C |
+| `clean` | Elimina artefactos intermedios |
+
+## Organización del proyecto
 
 ```
 parte2-kernel-x86_64/
-├── README.md
-├── Dockerfile
-├── Makefile
-├── linker.ld
-├── grub.cfg
+├── Dockerfile              # Toolchain: NASM, GCC, GRUB, QEMU
+├── docker-compose.yml      # Servicio `toolchain` con volumen montado
+├── .dockerignore
+├── Makefile                # Orquestación build / Docker / QEMU
+├── linker.ld               # Script de enlazado (pendiente secciones)
+├── grub.cfg                # Entrada GRUB: multiboot2 /boot/kernel.bin
+├── config/
+│   └── qemu.args           # Flags extra para QEMU
 ├── src/
-│   ├── boot/
-│   ├── arch/
-│   └── kernel/
+│   ├── README.md           # Mapa de episodios
+│   ├── boot/               # Episode 1 — Multiboot2 + _start
+│   │   ├── README.md
+│   │   ├── header.asm      # (pendiente)
+│   │   └── boot.asm        # (pendiente)
+│   ├── arch/               # Episode 2 — GDT, paging
+│   │   ├── README.md
+│   │   ├── gdt.asm
+│   │   └── paging.asm
+│   └── kernel/             # Episode 2 — C
+│       ├── README.md
+│       ├── main.c
+│       └── vga.c
 ├── scripts/
-└── output/          # kernel.iso, objetos (NO en Git)
+│   ├── build-iso.sh        # grub-mkrescue → kernel.iso
+│   └── run-qemu.sh         # Lanza qemu-system-x86_64
+├── build/                  # Objetos .o y .elf (gitignored)
+├── iso/                    # Staging temporal para GRUB (gitignored)
+└── output/                 # kernel.bin, kernel.iso (gitignored)
 ```
+
+## Flujo Episode 1
+
+```mermaid
+flowchart LR
+    ASM["src/boot/*.asm"] --> NASM["nasm -f elf32"]
+    NASM --> LD["ld -m elf_i386"]
+    LD --> ELF["build/kernel-ep1.elf"]
+    ELF --> BIN["output/kernel.bin"]
+    BIN --> GRUB["grub-mkrescue"]
+    GRUB --> ISO["output/kernel.iso"]
+    ISO --> QEMU["qemu-system-x86_64"]
+    QEMU --> VGA["Pantalla: OK @ 0xB8000"]
+```
+
+## GRUB / Multiboot2
+
+`grub.cfg` declara `multiboot2 /boot/kernel.bin`. El header en `header.asm` debe cumplir la especificación Multiboot2 para que GRUB cargue el kernel.
 
 ## Evidencias
 
@@ -89,6 +114,7 @@ Capturas y logs en [docs/evidencias/parte2/](../docs/evidencias/parte2/).
 
 | Síntoma | Posible causa |
 |---------|---------------|
-| Triple fault | GDT o paging incorrectos |
-| GRUB: no multiboot | Header Multiboot2 mal alineado |
-| Pantalla negra | VGA no inicializada; probar serial |
+| `permission denied` en scripts | `chmod +x scripts/*.sh` |
+| GRUB: no multiboot | Header Multiboot2 mal alineado o checksum incorrecto |
+| Pantalla negra en QEMU | VGA no escrita; verificar `0xB8000` y atributos de color |
+| Docker: UID mismatch | El contenedor usa usuario `builder` (uid 1000) |

@@ -1,0 +1,14 @@
+# Toolchain reproducible para Parte 2 — Kernel x86_64
+# Uso: docker compose run --rm toolchain make build
+
+services:
+  toolchain:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: integrative-kernel-toolchain:24.04
+    working_dir: /build
+    volumes:
+      - .:/build
+    stdin_open: true
+    tty: true

@@ -1,2 +1,2 @@
-; src/arch/gdt.asm — Global Descriptor Table
-; TODO: Episode 2
+; src/arch/gdt.asm — Episode 2
+; Pendiente: Global Descriptor Table para transición a long mode.
