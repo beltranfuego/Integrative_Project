@@ -119,35 +119,3 @@ cp -r offensive/evidencia/* ../docs/evidencias/parte3/
 | 9 | verify-all OK | `parte3/verify-all.log` | Reproducibilidad |
 | 10 | Historial git | `git log --oneline` | Commits distribuidos |
 
----
-
-## Video final (8 minutos)
-
-| Evidencia | Ubicación |
-|-----------|-----------|
-| Guion | [docs/guion-video-final.md](../guion-video-final.md) |
-| Enlace al video | Actualizar `parte1-distro-linux/demo/enlaces.md` |
-| Grabación 1080p | Hosting externo (YouTube/Drive) — no en Git |
-
----
-
-## Checklist de entrega
-
-- [ ] Todas las evidencias obligatorias de Parte 1 presentes
-- [ ] Capturas Episode 1 y 2 en `docs/evidencias/parte2/`
-- [ ] Salida `make test` y logs ofensivos en `docs/evidencias/parte3/`
-- [ ] SHA256 de ISO en `docs/evidencias/parte1/`
-- [ ] Enlace al video en `demo/enlaces.md`
-- [ ] `./scripts/verify-all.sh` pasa sin errores
-- [ ] Cada integrante con ≥ 5 commits en su área (ver `docs/equipo.md`)
-
----
-
-## Qué NO subir a Git
-
-- Videos (`.mp4`, `.mkv`)
-- ISO completa (`*.iso`)
-- PCAPs grandes
-- Secretos (`.env` con contraseñas reales)
-
-Ver [.gitignore](../../.gitignore) y [README.md](README.md).
