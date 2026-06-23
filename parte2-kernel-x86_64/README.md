@@ -1,6 +1,6 @@
 # Parte 2 — Kernel x86_64
 
-**Puntos (rúbrica):** 30 · **Responsable:** [Nombre C] · **Estado:** Completada
+** Alex Alban · **Estado:** Completada
 
 Kernel mínimo x86_64 siguiendo el tutorial *Write Your Own 64-bit Operating System*.
 Build reproducible en Docker con **NASM**, **GRUB (Multiboot2)**, **QEMU**.

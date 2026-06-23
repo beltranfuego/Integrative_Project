@@ -1,6 +1,6 @@
 # Parte 1 — Distro Linux personalizada (Cubic)
 
-**Puntos (rúbrica):** 25 · **Base:** Linux Mint Cinnamon · **Estado:** Completada
+**Nombre: Arthur Beltran · **Estado:** Completada
 
 ISO personalizada basada en **Linux Mint Cinnamon**, con modificaciones persistentes
 mediante repositorios APT, `/etc/skel`, overrides `gschema` y perfil `dconf`.
