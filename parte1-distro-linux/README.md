@@ -98,6 +98,7 @@ Instrucciones detalladas: [build/INSTRUCCIONES-BUILD.md](build/INSTRUCCIONES-BUI
 - Se instala `librewolf` y se elimina `firefox` con `--purge`.
 - `update-alternatives` registra LibreWolf como `x-www-browser`.
 - **Por qué persiste:** los paquetes quedan en la imagen del sistema; las alternativas viven en `/etc/alternatives/`.
+<img width="1860" height="1036" alt="{202E9749-B72C-43F6-BDDF-12AB0D27EFB4}" src="https://github.com/user-attachments/assets/cad529ce-cb14-471d-a9ef-761064fcd3de" />
 
 ### 2. Neovim configurado
 
