@@ -110,12 +110,15 @@ Instrucciones detalladas: [build/INSTRUCCIONES-BUILD.md](build/INSTRUCCIONES-BUI
 
 - Repositorio Microsoft (`packages.microsoft.com/repos/code`), paquete `code`.
 - **Por qué persiste:** instalación de sistema en `/usr/share/code`.
+<img width="1824" height="1036" alt="{F9F000CC-313A-41C1-BBF9-E64E72E05DE1}" src="https://github.com/user-attachments/assets/ca7885e5-8262-491c-9374-aad15e7206da" />
 
 ### 4. Tema por defecto (Mint-Y-Dark)
 
 - **Capa sistema:** `90_integrative-cinnamon.gschema.override` fija valores por defecto de GTK, iconos, cursor y tema Cinnamon; `glib-compile-schemas` los activa.
 - **Capa usuario:** `skel/.config/dconf/user` aplica las mismas claves en el primer login del usuario nuevo.
 - **Por qué persiste:** overrides en `/usr/share/glib-2.0/schemas/`; dconf en el home generado desde skel.
+<img width="1902" height="976" alt="{60643920-89F8-4B1D-B1D8-B1EF05CD43CD}" src="https://github.com/user-attachments/assets/1bcbf7a5-f2fe-4dac-8f56-1eddfb500b4e" />
+
 
 ### 5. `/etc/skel`
 
