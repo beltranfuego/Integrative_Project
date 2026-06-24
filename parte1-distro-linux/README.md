@@ -168,18 +168,6 @@ librewolf --version
 grep integrative ~/.bashrc
 ```
 
-### C. Checklist de entrega
-
-- [ ] La ISO arranca en VM sin errores
-- [ ] Firefox no aparece en el menú; LibreWolf sí
-- [ ] `code` y `nvim` funcionan en usuario nuevo
-- [ ] Tema oscuro Mint-Y-Dark visible tras primer login de usuario nuevo
-- [ ] Usuario creado **después** del build hereda skel (no solo el usuario live)
-
-## Video de demostración
-
-- Guion: [demo/guion-video.md](demo/guion-video.md)
-- Enlace: [demo/enlaces.md](demo/enlaces.md)
 
 ## Estructura de esta parte
 
@@ -205,21 +193,6 @@ parte1-distro-linux/
 └── demo/
 ```
 
-## Post-build
-
-```bash
-cd parte1-distro-linux/build
-sha256sum *.iso | tee ../../docs/evidencias/parte1/SHA256SUMS
-```
-
-## Nota sobre la ISO
-
-La ISO **no se sube a Git**. Solo checksum y evidencias en
-[docs/evidencias/parte1/](../docs/evidencias/parte1/).
-
-## Personalización del tema
-
-Para cambiar el tema, edita las claves `gtk-theme`, `icon-theme` y `name` en:
 
 1. `gschema/90_integrative-cinnamon.gschema.override`
 2. `skel/.config/dconf/user`
