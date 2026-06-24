@@ -118,33 +118,6 @@ Instrucciones detalladas: [build/INSTRUCCIONES-BUILD.md](build/INSTRUCCIONES-BUI
 
 
 
-### B. Usuario nuevo (prueba crítica de skel + dconf)
-
-```bash
-# Crear usuario de prueba
-sudo adduser --gecos "" testuser
-sudo login testuser   # o cerrar sesión y entrar como testuser
-```
-
-Como `testuser`:
-
-```bash
-# Neovim
-test -f ~/.config/nvim/init.lua && nvim --headless +'lua print(vim.o.number)' +qa
-
-# Tema y navegador (Cinnamon)
-gsettings get org.cinnamon.desktop.interface gtk-theme
-# → 'Mint-Y-Dark'
-gsettings get org.gnome.desktop.default-applications web-browser
-# → ['librewolf.desktop']
-
-# VS Code y LibreWolf
-code --version
-librewolf --version
-
-# Bash personalizado
-grep integrative ~/.bashrc
-```
 
 
 ## Estructura de esta parte
