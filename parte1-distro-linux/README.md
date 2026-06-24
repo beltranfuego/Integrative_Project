@@ -120,11 +120,6 @@ Instrucciones detalladas: [build/INSTRUCCIONES-BUILD.md](build/INSTRUCCIONES-BUI
 <img width="1902" height="976" alt="{60643920-89F8-4B1D-B1D8-B1EF05CD43CD}" src="https://github.com/user-attachments/assets/1bcbf7a5-f2fe-4dac-8f56-1eddfb500b4e" />
 
 
-### 5. `/etc/skel`
-
-- Contiene dotfiles que Mint copia automáticamente al crear usuarios (`/etc/skel` → `/home/nuevo/`).
-- `.bashrc.append` se fusiona sin borrar el `.bashrc` original de Mint.
-- **Por qué persiste:** cada `adduser`/`useradd` replica skel; no afecta usuarios ya existentes en la sesión live.
 
 ## Verificación de persistencia
 
