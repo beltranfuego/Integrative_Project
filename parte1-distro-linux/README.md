@@ -117,23 +117,6 @@ Instrucciones detalladas: [build/INSTRUCCIONES-BUILD.md](build/INSTRUCCIONES-BUI
 
 
 
-## Verificación de persistencia
-
-Probar en VM con la ISO generada:
-
-### A. Sistema (afecta a todos los usuarios)
-
-```bash
-# Paquetes
-dpkg -l | grep -E 'librewolf|code|neovim'
-dpkg -l firefox   # no debe estar instalado (o estado rc tras purge)
-
-# Navegador por defecto del sistema
-update-alternatives --display x-www-browser | grep librewolf
-
-# Overrides gschema compilados
-grep -r Mint-Y-Dark /usr/share/glib-2.0/schemas/gschemas.compiled && echo OK
-```
 
 ### B. Usuario nuevo (prueba crítica de skel + dconf)
 
