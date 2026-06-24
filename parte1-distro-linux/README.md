@@ -100,11 +100,7 @@ Instrucciones detalladas: [build/INSTRUCCIONES-BUILD.md](build/INSTRUCCIONES-BUI
 - **Por qué persiste:** los paquetes quedan en la imagen del sistema; las alternativas viven en `/etc/alternatives/`.
 <img width="1860" height="1036" alt="{202E9749-B72C-43F6-BDDF-12AB0D27EFB4}" src="https://github.com/user-attachments/assets/cad529ce-cb14-471d-a9ef-761064fcd3de" />
 
-### 2. Neovim configurado
 
-- `neovim` se instala por APT.
-- `init.lua` en `/etc/skel/.config/nvim/` se copia a `~/.config/nvim/` al crear cada usuario (`useradd` copia `/etc/skel`).
-- **Por qué persiste:** el binario está en la ISO; la config viaja en el home del usuario nuevo.
 
 ### 3. Visual Studio Code
 
